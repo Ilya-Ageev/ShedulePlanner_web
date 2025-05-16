@@ -8,29 +8,130 @@
     padding: 0px 20px 0px 20px;
 }
 
-.jost{
-  font-family: "Jost", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: auto;
-  font-style: normal;
+.jost {
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: auto;
+    font-style: normal;
 }
 
-.gap250px{
+.gap250px {
     gap: 250px;
 }
-@media (max-width: 1600px){
-    .gap250px{
-        gap:100px;
+
+.mainTaskBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 32px;
+    max-width: 1600px;
+    margin: 80px auto 0 auto;
+    padding: 32px 16px;
+    box-sizing: border-box;
+    height: auto;
+}
+
+.taskBlock {
+    background-color: #4CABA6;
+    border-radius: 20px;
+    min-height: 320px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.taskBlockHeader {
+    background-color: #4C4A59;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 40px;
+    font-family: Jost;
+    color: white;
+    user-select: none;
+}
+
+.btn-Add-Task {
+    background-color: #0897B4;
+    text-align: center;
+    max-width: 500px;
+    padding: 15px 60px;
+    font-family: Jost;
+    font-size: 30px;
+    color: white;
+    border-radius: 20px;
+    user-select: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1600px) {
+    .gap250px {
+        gap: 100px;
     }
-    .textOnMainPanel{
+
+    .textOnMainPanel {
         font-size: 30px;
     }
 }
-@media (max-width: 1000px){
-    .gap250px{
-        gap:10px;
+
+@media (max-width: 1000px) {
+    .gap250px {
+        gap: 10px;
     }
-    .textOnMainPanel{
+
+    .textOnMainPanel {
         font-size: 25px;
+    }
+
+    .mainTaskBlock {
+        margin: 60px auto 0 auto;
+    }
+
+    .taskBlockHeader {
+        font-size: 30px;
+    }
+
+    .btn-Add-Task {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .gap250px {
+        gap: 5px;
+    }
+
+    .textOnMainPanel {
+        font-size: 14px;
+    }
+
+    .mainTaskBlock {
+        grid-template-columns: 1fr;
+        grid-template-rows: 4fr;
+        gap: 10;
+        margin: 40px auto 0 auto;
+        padding: 16px 8px;
+    }
+
+    .taskBlockHeader {
+        font-size: 18px;
     }
 }
