@@ -22,10 +22,10 @@
                     <a class="nav-link textOnMainPanel jost" href="#Task-Block">Задачи</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link textOnMainPanel jost" href="#">Календарь</a>
+                    <a class="nav-link textOnMainPanel jost" href="#Calendar-Block">Календарь</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link textOnMainPanel jost" href="#">Заметки</a>
+                    <a class="nav-link textOnMainPanel jost" href="#Notes-Block">Заметки</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link textOnMainPanel jost" href="#">Профиль</a>
@@ -33,7 +33,10 @@
             </ul>
         </div>
     </nav>
+
+    <!--Блок "Задачи"-->
     <section id="Task-Block">
+        <h1 class="headerBlock">Задачи</h1>
         <div class="mainTaskBlock">
             <div class="taskBlock">
                 <div class="taskBlockHeader">В будущем</div>
@@ -50,6 +53,29 @@
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
             <div class="btn-Add-Task">Добавить задачу</div>
+        </div>
+    </section>
+
+    <!--Блок "Календарь"-->
+    <section id="Calendar-Block">
+        <h1 class="headerBlock">Календарь</h1>
+        <div class="mainCalendarBlock">
+            <div class="calendarBlock">
+                <div class="calendar"></div>
+                <div class="calendarBlock-Tasks"></div>
+            </div>
+        </div>
+
+    </section>
+
+    <!--Блок "Заметки"-->
+    <section id="Notes-Block">
+        <h1 class="headerBlock">Заметки</h1>
+        <div class="mainNotesBlock">
+            <div class="notesBlock"></div>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="btn-Add-Note">Добавить заметку</div>
         </div>
     </section>
 </body>
