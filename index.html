@@ -28,7 +28,7 @@
                     <a class="nav-link textOnMainPanel jost" href="#Notes-Block">Заметки</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link textOnMainPanel jost" href="#">Профиль</a>
+                    <button class="profile-btn textOnMainPanel " id="open-modal">Профиль</button>
                 </li>
             </ul>
         </div>
@@ -78,6 +78,111 @@
             <div class="btn-Add-Note">Добавить заметку</div>
         </div>
     </section>
+
+    <!--Профиль-->
+    <div id="profile" class="modal-window">
+        <div class="modal-profile">
+            <div style="display: flex; gap: 10px;">
+                <label>Имя</label>
+                <div div-with-data></div>
+            </div>
+        </div>
+    </div>
+
+    <!--Окно авторизации-->
+    <div id="modal" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <h1 style="user-select: none; color: white;" class="jost">Вход</h1>
+            <div class="main-input-box">
+                <label class="text-label">Логин</label>
+                <div class="input-box">
+                    <input type="text" required>
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Пароль</label>
+                <div class="input-box">
+                    <input type="password" required>
+                </div>
+            </div>
+            <button class="btn-register" id="btn-registration">Зарегистрироваться</button>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-login-back">Назад</button>
+                <button class="btn-Login-Back">Войти</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Окно регистрации-->
+    <div id="registration" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <h1 style="user-select: none; color: white;" class="jost">Регистрация</h1>
+            <div class="main-input-box">
+                <label class="text-label">Имя</label>
+                <div class="input-box">
+                    <input type="text">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Логин</label>
+                <div class="input-box">
+                    <input type="text" required>
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Пароль</label>
+                <div class="input-box">
+                    <input type="password" required>
+                </div>
+            </div>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-registration-back">Назад</button>
+                <button class="btn-Login-Back">Зарегистрироваться</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const profileModal = document.getElementById('profile');
+        const authorizationModal = document.getElementById('modal');
+        const registrationModal = document.getElementById('registration');
+        const btn = document.getElementById('open-modal');
+
+        function isAuthenticated() {
+            return localStorage.getItem('isAuthenticated') === 'true';
+        };
+
+        btn.onclick = () => {
+            document.body.classList.add('close-overflow');
+
+            if (isAuthenticated()) {
+                profileModal.style.display = 'flex';
+            } else {
+                authorizationModal.style.display = 'flex';
+            }
+        };
+
+        const btn_login_back = document.getElementById('btn-login-back');
+        btn_login_back.onclick = () => {
+            document.body.classList.remove('close-overflow');
+            authorizationModal.style.display = 'none';
+            const inputs = authorizationModal.querySelectorAll('input');
+            inputs.forEach(input => input.value = '');
+        };
+
+        const btn_registration = document.getElementById('btn-registration');
+        btn_registration.onclick = () => {
+            authorizationModal.style.display = 'none';
+            registrationModal.style.display = 'flex';
+        };
+
+        const btn_registration_back = document.getElementById('btn-registration-back');
+        btn_registration_back.onclick = () => {
+            registrationModal.style.display = 'none';
+            authorizationModal.style.display = 'flex';
+        }
+
+    </script>
 </body>
 
 </html>

@@ -1,3 +1,7 @@
+.close-overflow {
+    overflow: hidden;
+}
+
 .colorNavBar {
     background-color: #0897B4;
 }
@@ -17,6 +21,12 @@
 
 .gap250px {
     gap: 250px;
+}
+
+.profile-btn {
+    background-color: transparent;
+    border-color: transparent;
+    font-family: Jost;
 }
 
 .mainTaskBlock {
@@ -122,7 +132,99 @@
     margin-bottom: 30px;
 }
 
+.modal-window {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
 
+.modal-profile {
+    background-color: #F2CDAC;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #4C4A59;
+    width: 40%;
+    max-width: 700px;
+    height: 20%;
+    max-height: 350px;
+}
+
+.modal-authorization-and-registration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #4CABA6;
+    margin: 15% auto;
+    padding: 20px;
+    width: 40%;
+    max-width: 800px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.div-with-data {
+    background-color: white;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+}
+
+.main-input-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+.input-box {
+    background-color: white;
+    border-radius: 5px;
+    flex-grow: 1;
+}
+
+.input-box input {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    font-size: 25px;
+    font-family: Jost;
+}
+
+.text-label {
+    font-family: Jost;
+    color: white;
+    font-size: 25px;
+    width: 100px;
+    text-align: right;
+}
+
+.btn-register {
+    border: none;
+    border-radius: 15px;
+    background-color: white;
+    margin-top: 15px;
+    padding: 10px;
+    font-family: Jost;
+    font-size: 18px;
+}
+
+.btn-Login-Back {
+    border: none;
+    font-family: Jost;
+    background-color: transparent;
+    margin-top: 10px;
+    color: white;
+    font-size: 30px;
+}
 
 
 
