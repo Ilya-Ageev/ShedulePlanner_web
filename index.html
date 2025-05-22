@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css">
+    <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
 </head>
 
 <body style="background-color: #F2CDAC;">
@@ -40,19 +42,25 @@
         <div class="mainTaskBlock">
             <div class="taskBlock">
                 <div class="taskBlockHeader">В будущем</div>
+                <div id="future-tasks" class="block-with-tasks">
+
+                </div>
             </div>
             <div class="taskBlock">
                 <div class="taskBlockHeader">Сегодня</div>
+                <div id="today-tasks" class="block-with-tasks"></div>
             </div>
             <div class="taskBlock">
                 <div class="taskBlockHeader">Просрочено</div>
+                <div id="overdue-tasks" class="block-with-tasks"></div>
             </div>
             <div class="taskBlock">
                 <div class="taskBlockHeader">Выполнено</div>
+                <div id="complete-tasks" class="block-with-tasks"></div>
             </div>
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
-            <div class="btn-Add-Task">Добавить задачу</div>
+            <div class="btn-Add-Task" id="btn-add-task">Добавить задачу</div>
         </div>
     </section>
 
@@ -61,7 +69,9 @@
         <h1 class="headerBlock">Календарь</h1>
         <div class="mainCalendarBlock">
             <div class="calendarBlock">
-                <div class="calendar"></div>
+                <div class="calendar">
+                    <div id="calendar_here"></div>
+                </div>
                 <div class="calendarBlock-Tasks"></div>
             </div>
         </div>
@@ -75,9 +85,126 @@
             <div class="notesBlock"></div>
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
-            <div class="btn-Add-Note">Добавить заметку</div>
+            <div class="btn-Add-Note" id="btn-add-note">Добавить заметку</div>
         </div>
     </section>
+
+    <!--Окно добавления новой задачи-->
+    <div id="add-task-window" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <h1 style="user-select: none; color: white;" class="jost">Добавить задачу</h1>
+            <div class="main-input-box">
+                <label class="text-label">Заголовок</label>
+                <div class="input-box">
+                    <input type="text" required id="title-task">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Описание</label>
+                <div class="input-box">
+                    <input type="text" id="description-task">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Дата</label>
+                <div class="input-box">
+                    <input type="date" required min="2024-01-01" max="2200-12-31" id="date-task">
+                </div>
+            </div>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-task-add-back">Назад</button>
+                <button class="btn-Login-Back" id="add-new-task">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Окно для просмотра подробностей задачи-->
+    <div id="add-task-window" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <h1 style="user-select: none; color: white;" class="jost">Добавить задачу</h1>
+            <div class="main-input-box">
+                <label class="text-label">Заголовок</label>
+                <div class="input-box">
+                    <input type="text" required id="title-task">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Описание</label>
+                <div class="input-box">
+                    <input type="text" id="description-task">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Дата</label>
+                <div class="input-box">
+                    <input type="date" required min="2024-01-01" max="2200-12-31" id="date-task">
+                </div>
+            </div>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-task-add-back">Назад</button>
+                <button class="btn-Login-Back" id="add-new-task">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Окно для просмотра подробностей задачи-->
+    <div id="task-details" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <div class="main-input-box">
+                <label class="text-label">Заголовок</label>
+                <div class="input-box">
+                    <input type="text" required id="title-task-details">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Дата</label>
+                <div class="input-box">
+                    <input type="date" required min="2024-01-01" max="2200-12-31" id="date-task-details">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Описание</label>
+                <div class="input-box">
+                    <input type="text" id="description-task-details">
+                </div>
+            </div>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-task-back-details">Назад</button>
+                <button class="btn-Login-Back" id="btn-task-delete-details">Удалить</button>
+                <button class="btn-Login-Back" id="btn-task-save-details">Сохранить</button>
+                <div style="display: flex; align-items: center;">
+                    <input type="checkbox" id="task-completed-checkbox">
+                    <label for="task-completed-checkbox" class="text-label" style="margin: 0;">Выполнено</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+
+    <!--Окно добавления заметки-->
+    <div id="add-note-window" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <h1 style="user-select: none; color: white;" class="jost">Добавить заметку</h1>
+            <div class="main-input-box">
+                <label class="text-label">Заголовок</label>
+                <div class="input-box">
+                    <input type="text">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Описание</label>
+                <div class="input-box">
+                    <input type="text" required>
+                </div>
+            </div>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-note-add-back">Назад</button>
+                <button class="btn-Login-Back">Добавить</button>
+            </div>
+        </div>
+    </div>
 
     <!--Профиль-->
     <div id="profile" class="modal-window">
@@ -141,48 +268,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-        const profileModal = document.getElementById('profile');
-        const authorizationModal = document.getElementById('modal');
-        const registrationModal = document.getElementById('registration');
-        const btn = document.getElementById('open-modal');
-
-        function isAuthenticated() {
-            return localStorage.getItem('isAuthenticated') === 'true';
-        };
-
-        btn.onclick = () => {
-            document.body.classList.add('close-overflow');
-
-            if (isAuthenticated()) {
-                profileModal.style.display = 'flex';
-            } else {
-                authorizationModal.style.display = 'flex';
-            }
-        };
-
-        const btn_login_back = document.getElementById('btn-login-back');
-        btn_login_back.onclick = () => {
-            document.body.classList.remove('close-overflow');
-            authorizationModal.style.display = 'none';
-            const inputs = authorizationModal.querySelectorAll('input');
-            inputs.forEach(input => input.value = '');
-        };
-
-        const btn_registration = document.getElementById('btn-registration');
-        btn_registration.onclick = () => {
-            authorizationModal.style.display = 'none';
-            registrationModal.style.display = 'flex';
-        };
-
-        const btn_registration_back = document.getElementById('btn-registration-back');
-        btn_registration_back.onclick = () => {
-            registrationModal.style.display = 'none';
-            authorizationModal.style.display = 'flex';
-        }
-
-    </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
