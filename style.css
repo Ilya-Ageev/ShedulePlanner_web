@@ -72,6 +72,7 @@
     color: white;
     border-radius: 20px;
     user-select: none;
+    cursor: pointer;
 }
 
 .headerBlock {
@@ -130,6 +131,7 @@
     user-select: none;
     margin-top: 20px;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 
 .modal-window {
@@ -203,7 +205,7 @@
     font-family: Jost;
     color: white;
     font-size: 25px;
-    width: 100px;
+    width: 150px;
     text-align: right;
 }
 
@@ -224,6 +226,37 @@
     margin-top: 10px;
     color: white;
     font-size: 30px;
+}
+
+.task-class {
+    background-color: #0897B4;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: left;
+    width: 90%;
+    height: auto;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 10px;
+    gap: 5px;
+}
+
+.task-title {
+    font-family: Jost;
+    color: white;
+    font-size: 24px;
+}
+
+.task-date {
+    font-family: Jost;
+    color: white;
+    font-size: 18;
+}
+
+.block-with-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
