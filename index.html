@@ -118,6 +118,71 @@
         </div>
     </div>
 
+    <!--Окно для просмотра подробностей задачи-->
+    <div id="add-task-window" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <h1 style="user-select: none; color: white;" class="jost">Добавить задачу</h1>
+            <div class="main-input-box">
+                <label class="text-label">Заголовок</label>
+                <div class="input-box">
+                    <input type="text" required id="title-task">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Описание</label>
+                <div class="input-box">
+                    <input type="text" id="description-task">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Дата</label>
+                <div class="input-box">
+                    <input type="date" required min="2024-01-01" max="2200-12-31" id="date-task">
+                </div>
+            </div>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-task-add-back">Назад</button>
+                <button class="btn-Login-Back" id="add-new-task">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Окно для просмотра подробностей задачи-->
+    <div id="task-details" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <div class="main-input-box">
+                <label class="text-label">Заголовок</label>
+                <div class="input-box">
+                    <input type="text" required id="title-task-details">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Дата</label>
+                <div class="input-box">
+                    <input type="date" required min="2024-01-01" max="2200-12-31" id="date-task-details">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Описание</label>
+                <div class="input-box">
+                    <input type="text" id="description-task-details">
+                </div>
+            </div>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-task-back-details">Назад</button>
+                <button class="btn-Login-Back" id="btn-task-delete-details">Удалить</button>
+                <button class="btn-Login-Back" id="btn-task-save-details">Сохранить</button>
+                <div style="display: flex; align-items: center;">
+                    <input type="checkbox" id="task-completed-checkbox">
+                    <label for="task-completed-checkbox" class="text-label" style="margin: 0;">Выполнено</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+
     <!--Окно добавления заметки-->
     <div id="add-note-window" class="modal-window">
         <div class="modal-authorization-and-registration">
@@ -203,140 +268,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-        webix.ui({
-            container: "calendar_here",
-            view: "calendar",
-            date: new Date(),
-            weekHeader: true,
-            width: 300,
-            height: 300
-        });
-        const profileModal = document.getElementById('profile');
-        const authorizationModal = document.getElementById('modal');
-        const registrationModal = document.getElementById('registration');
-        const btn = document.getElementById('open-modal');
-
-        function isAuthenticated() {
-            return localStorage.getItem('isAuthenticated') === 'true';
-        };
-
-        //Проверка авторизации при нажатии кнопки "Профиль"
-        btn.onclick = () => {
-            document.body.classList.add('close-overflow');
-
-            if (isAuthenticated()) {
-                profileModal.style.display = 'flex';
-            } else {
-                authorizationModal.style.display = 'flex';
-            }
-        };
-
-        //Кнопка "Назад" в форме входа
-        const btn_login_back = document.getElementById('btn-login-back');
-        btn_login_back.onclick = () => {
-            document.body.classList.remove('close-overflow');
-            authorizationModal.style.display = 'none';
-            const inputs = authorizationModal.querySelectorAll('input');
-            inputs.forEach(input => input.value = '');
-        };
-
-        //Кнопка для перехода к форме регистрации
-        const btn_registration = document.getElementById('btn-registration');
-        btn_registration.onclick = () => {
-            authorizationModal.style.display = 'none';
-            registrationModal.style.display = 'flex';
-        };
-
-        //Кнопка "Назад" в форме регистрации
-        const btn_registration_back = document.getElementById('btn-registration-back');
-        btn_registration_back.onclick = () => {
-            registrationModal.style.display = 'none';
-            authorizationModal.style.display = 'flex';
-            const inputs = registrationModal.querySelectorAll('input');
-            inputs.forEach(input => input.value = '');
-        };
-
-        //Открытие формы для добавления задачи
-        const btn_add_task = document.getElementById('btn-add-task');
-        const add_task_window = document.getElementById('add-task-window');
-        btn_add_task.onclick = () => {
-            add_task_window.style.display = 'flex';
-            document.body.classList.add('close-overflow')
-        };
-
-        //Кнопка "Назад" в форме добавления задачи
-        const btn_task_add_back = document.getElementById('btn-task-add-back');
-        btn_task_add_back.onclick = () => {
-            document.body.classList.remove('close-overflow');
-            add_task_window.style.display = 'none';
-            const inputs = add_task_window.querySelectorAll('input');
-            inputs.forEach(input => input.value = '');
-        };
-
-        //Открытие формы добавления заметки
-        const btn_add_note = document.getElementById('btn-add-note');
-        const add_note_window = document.getElementById('add-note-window');
-        btn_add_note.onclick = () => {
-            add_note_window.style.display = 'flex';
-            document.body.classList.add('close-overflow')
-        };
-
-        //Кнопка "Назад" в форме добавления заметки
-        const btn_note_add_back = document.getElementById('btn-note-add-back');
-        btn_note_add_back.onclick = () => {
-            document.body.classList.remove('close-overflow');
-            add_note_window.style.display = 'none';
-        };
-
-        //Добавление новой задачи
-        const add_new_task = document.getElementById('add-new-task');
-        add_new_task.onclick = (event) => {
-            const title_task = document.getElementById('title-task').value;
-            const description_task = document.getElementById('description-task').value;
-            const date_task = document.getElementById('date-task').value;
-
-            const new_task = document.createElement('div');
-            new_task.classList.add('task-class');
-
-            const title = document.createElement('div');
-            title.classList.add('task-title');
-            title.textContent = title_task;
-
-            const description = document.createElement('div');
-            description.textContent = description_task;
-
-            const date = document.createElement('div');
-            date.classList.add('task-date');
-            date.textContent = date_task;
-            const dateTask = new Date(date_task);
-            dateTask.setHours(0, 0, 0, 0);
-
-            new_task.appendChild(title);
-            new_task.appendChild(date);
-
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            if (dateTask < today) {
-                const task_element = document.getElementById('overdue-tasks');
-                task_element.appendChild(new_task);
-            } else if (dateTask.getTime() === today.getTime()) {
-                const task_element = document.getElementById('today-tasks');
-                task_element.appendChild(new_task);
-            } else if (dateTask > today) {
-                const task_element = document.getElementById('future-tasks');
-                task_element.appendChild(new_task);
-            };
-
-
-
-            const inputs = add_task_window.querySelectorAll('input');
-            inputs.forEach(input => input.value = '');
-        };
-
-    </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
