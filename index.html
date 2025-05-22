@@ -82,7 +82,7 @@
     <section id="Notes-Block">
         <h1 class="headerBlock">Заметки</h1>
         <div class="mainNotesBlock">
-            <div class="notesBlock"></div>
+            <div class="notesBlock" id="block-with-notes"></div>
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
             <div class="btn-Add-Note" id="btn-add-note">Добавить заметку</div>
@@ -90,35 +90,6 @@
     </section>
 
     <!--Окно добавления новой задачи-->
-    <div id="add-task-window" class="modal-window">
-        <div class="modal-authorization-and-registration">
-            <h1 style="user-select: none; color: white;" class="jost">Добавить задачу</h1>
-            <div class="main-input-box">
-                <label class="text-label">Заголовок</label>
-                <div class="input-box">
-                    <input type="text" required id="title-task">
-                </div>
-            </div>
-            <div class="main-input-box">
-                <label class="text-label">Описание</label>
-                <div class="input-box">
-                    <input type="text" id="description-task">
-                </div>
-            </div>
-            <div class="main-input-box">
-                <label class="text-label">Дата</label>
-                <div class="input-box">
-                    <input type="date" required min="2024-01-01" max="2200-12-31" id="date-task">
-                </div>
-            </div>
-            <div style="display: flex; justify-content:space-between; width:100%;">
-                <button class="btn-Login-Back" id="btn-task-add-back">Назад</button>
-                <button class="btn-Login-Back" id="add-new-task">Добавить</button>
-            </div>
-        </div>
-    </div>
-
-    <!--Окно для просмотра подробностей задачи-->
     <div id="add-task-window" class="modal-window">
         <div class="modal-authorization-and-registration">
             <h1 style="user-select: none; color: white;" class="jost">Добавить задачу</h1>
@@ -190,18 +161,41 @@
             <div class="main-input-box">
                 <label class="text-label">Заголовок</label>
                 <div class="input-box">
-                    <input type="text">
+                    <input type="text" id="title-note">
                 </div>
             </div>
             <div class="main-input-box">
                 <label class="text-label">Описание</label>
                 <div class="input-box">
-                    <input type="text" required>
+                    <input type="text" required id="description-note">
                 </div>
             </div>
             <div style="display: flex; justify-content:space-between; width:100%;">
                 <button class="btn-Login-Back" id="btn-note-add-back">Назад</button>
-                <button class="btn-Login-Back">Добавить</button>
+                <button class="btn-Login-Back" id="btn-add-new-note">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Окно для просмотра подробностей заметки-->
+    <div id="note-details" class="modal-window">
+        <div class="modal-authorization-and-registration">
+            <div class="main-input-box">
+                <label class="text-label">Заголовок</label>
+                <div class="input-box">
+                    <input type="text" required id="title-note-details">
+                </div>
+            </div>
+            <div class="main-input-box">
+                <label class="text-label">Описание</label>
+                <div class="input-box">
+                    <input type="text" id="description-note-details">
+                </div>
+            </div>
+            <div style="display: flex; justify-content:space-between; width:100%;">
+                <button class="btn-Login-Back" id="btn-note-back-details">Назад</button>
+                <button class="btn-Login-Back" id="btn-note-delete-details">Удалить</button>
+                <button class="btn-Login-Back" id="btn-note-save-details">Сохранить</button>
             </div>
         </div>
     </div>

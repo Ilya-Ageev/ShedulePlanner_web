@@ -244,3 +244,61 @@ btn_task_back_details.onclick = () => {
     task_details.style.display = 'none';
     document.body.classList.remove('close-overflow');
 };
+
+//========== Добавление заметки =====================
+const btn_add_new_note = document.getElementById('btn-add-new-note');
+btn_add_new_note.onclick = (event) => {
+    event.preventDefault();
+
+    const title_note = document.getElementById('title-note').value;
+    const description_note = document.getElementById('description-note').value;
+
+
+    const new_note = document.createElement('div');
+    new_note.classList.add('task-class');
+    new_note.style.cursor = 'pointer';
+
+    const note_title_block = document.createElement('div');
+    note_title_block.classList.add('task-title');
+    note_title_block.textContent = title_note;
+
+    if (!title_note) {
+        note_title_block.textContent = 'Без заголовка';
+    };
+
+    const note_date_block = document.createElement('div');
+    note_date_block.classList.add('task-date');
+    const a = new Date();
+    a.setHours(0, 0, 0, 0);
+    note_date_block.textContent = 'Создано: ' + a.toISOString().split('T')[0];
+
+    new_note.appendChild(note_title_block);
+    new_note.appendChild(note_date_block);
+    new_note.dataset.descriptionNote = description_note;
+
+    document.getElementById('block-with-notes').appendChild(new_note);
+
+    //=============== Обработка клика на заметку ==================
+    new_note.addEventListener('click', () => {
+        const note_details = document.getElementById('note-details');
+        note_details.style.display = 'flex';
+        document.body.classList.add('close-overflow');
+
+        document.getElementById('title-note-details').value = new_note.querySelector('.task-title').textContent;
+        document.getElementById('description-note-details').value = new_note.dataset.descriptionNote;
+
+        note_details.currentNote = new_note;
+        note_details.currentTitleNote = note_title_block;
+    });
+
+    const inputs = add_note_window.querySelectorAll('input');
+    inputs.forEach(input => input.value = '');
+};
+
+// ================ Кнопка "Назад" в окне подробностей заметки =====================
+const btn_note_back_details = document.getElementById('btn-note-back-details');
+btn_note_back_details.onclick = () => {
+    const note_details = document.getElementById('note-details');
+    note_details.style.display = 'none';
+    document.body.classList.remove('close-overflow');
+};
