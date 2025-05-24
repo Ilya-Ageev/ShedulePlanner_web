@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css">
-    <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="theme1.css">
 </head>
 
 <body style="background-color: #F2CDAC;">
@@ -69,10 +69,9 @@
         <h1 class="headerBlock">Календарь</h1>
         <div class="mainCalendarBlock">
             <div class="calendarBlock">
-                <div class="calendar">
-                    <div id="calendar_here"></div>
+                <div class="calendar" id="calendar-here">
                 </div>
-                <div class="calendarBlock-Tasks"></div>
+                <div class="calendarBlock-Tasks" id="calendar-tasks-block"></div>
             </div>
         </div>
 
@@ -262,6 +261,7 @@
             </div>
         </div>
     </div>
+    <script src="./caleandar.js"></script>
     <script src="./script.js"></script>
 </body>
 

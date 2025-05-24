@@ -160,6 +160,7 @@ add_new_task.onclick = (event) => {
     inputs.forEach(input => input.value = '');
 };
 
+//=============== Кнопка "Сохранить" в окне подробностей задачи ===================================
 const btn_task_save_details = document.getElementById('btn-task-save-details');
 btn_task_save_details.onclick = () => {
     const task_details = document.getElementById('task-details');
@@ -264,17 +265,19 @@ btn_add_new_note.onclick = (event) => {
 
     if (!title_note) {
         note_title_block.textContent = 'Без заголовка';
-    };
+    }
 
     const note_date_block = document.createElement('div');
     note_date_block.classList.add('task-date');
     const a = new Date();
     a.setHours(0, 0, 0, 0);
-    note_date_block.textContent = 'Создано: ' + a.toISOString().split('T')[0];
+    const Month = String(a.getMonth() + 1).padStart(2, '0');
+    const Day = String(a.getDate()).padStart(2, '0');
+    note_date_block.textContent = `Создано: ${a.getFullYear()}-${Month}-${Day}`;
 
     new_note.appendChild(note_title_block);
     new_note.appendChild(note_date_block);
-    new_note.dataset.descriptionNote = description_note;
+    new_note.dataset.description = description_note;
 
     document.getElementById('block-with-notes').appendChild(new_note);
 
@@ -285,7 +288,7 @@ btn_add_new_note.onclick = (event) => {
         document.body.classList.add('close-overflow');
 
         document.getElementById('title-note-details').value = new_note.querySelector('.task-title').textContent;
-        document.getElementById('description-note-details').value = new_note.dataset.descriptionNote;
+        document.getElementById('description-note-details').value = new_note.dataset.description;
 
         note_details.currentNote = new_note;
         note_details.currentTitleNote = note_title_block;
@@ -293,6 +296,9 @@ btn_add_new_note.onclick = (event) => {
 
     const inputs = add_note_window.querySelectorAll('input');
     inputs.forEach(input => input.value = '');
+
+    add_note_window.style.display = 'none';
+    document.body.classList.remove('close-overflow');
 };
 
 // ================ Кнопка "Назад" в окне подробностей заметки =====================
@@ -302,3 +308,54 @@ btn_note_back_details.onclick = () => {
     note_details.style.display = 'none';
     document.body.classList.remove('close-overflow');
 };
+
+//=============== Кнопка "Удалить" в окне подробностей заметки ===============================
+const btn_note_delete_details = document.getElementById('btn-note-delete-details');
+btn_note_delete_details.onclick = () => {
+    const note_details = document.getElementById('note-details');
+
+    if (note_details.currentNote) {
+        note_details.currentNote.remove();
+
+        note_details.style.display = 'none';
+        document.body.classList.remove('close-overflow');
+
+        note_details.currentNote = null;
+    }
+};
+
+//======================= Кнопка "Сохранить" в окне подробностей заметки =================
+const btn_note_save_details = document.getElementById('btn-note-save-details');
+btn_note_save_details.onclick = () => {
+    const note_details = document.getElementById('note-details');
+
+    const newTitle = document.getElementById('title-note-details').value;
+    const newDescription = document.getElementById('description-note-details').value;
+
+    const currentTitleNote = note_details.currentNote.querySelector('.task-title').textContent.trim();
+    const currentDescription = note_details.currentNote.dataset.description ? note_details.currentNote.dataset.description.trim() : '';
+
+    if (newTitle === currentTitleNote && newDescription === currentDescription) {
+        alert('Изменений нет.');
+        return;
+    }
+
+    if (note_details.currentNote) {
+        note_details.currentNote.querySelector('.task-title').textContent = newTitle;
+        note_details.currentNote.dataset.description = newDescription;
+
+        const now = new Date();
+
+        const full_new_date = `Изменено: ${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        note_details.currentNote.querySelector('.task-date').textContent = full_new_date;
+
+        note_details.style.display = 'none';
+        document.body.classList.remove('close-overflow');
+    }
+};
+
+//=======================КАЛЕНДАРЬ========================
+
+
+  
