@@ -357,5 +357,160 @@ btn_note_save_details.onclick = () => {
 
 //=======================КАЛЕНДАРЬ========================
 
+document.addEventListener('DOMContentLoaded', () => {
+    const calendarContainer = document.getElementById('simple-calendar');
+    const calendarTasksBlock = document.getElementById('calendar-tasks-block');
 
-  
+    const calendarModal = document.getElementById('calendar-task-modal');
+    const calendarModalTitle = document.getElementById('calendar-modal-title');
+    const calendarModalDate = document.getElementById('calendar-modal-date');
+    const calendarModalDescription = document.getElementById('calendar-modal-description');
+    const calendarBtnClose = document.getElementById('calendar-btn-modal-close');
+
+    let selectedCell = null;
+    let today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+
+    // Рисуем календарь
+    function renderCalendar(month, year) {
+        calendarContainer.innerHTML = '';
+
+        const header = document.createElement('div');
+        header.className = 'simple-calendar-header';
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = '<';
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = '>';
+        const monthNames = [
+            'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+        ];
+        const title = document.createElement('span');
+        title.textContent = monthNames[month] + ' ' + year;
+        header.appendChild(prevBtn);
+        header.appendChild(title);
+        header.appendChild(nextBtn);
+        calendarContainer.appendChild(header);
+
+        prevBtn.onclick = () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar(currentMonth, currentYear);
+        };
+        nextBtn.onclick = () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar(currentMonth, currentYear);
+        };
+
+        const table = document.createElement('table');
+        table.className = 'simple-calendar-table';
+        const daysRow = document.createElement('tr');
+        ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach(d => {
+            const th = document.createElement('th');
+            th.textContent = d;
+            daysRow.appendChild(th);
+        });
+        table.appendChild(daysRow);
+
+        const firstDay = new Date(year, month, 1);
+        let startDay = firstDay.getDay() - 1;
+        if (startDay < 0) startDay = 6;
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        let tr = document.createElement('tr');
+        for (let i = 0; i < startDay; i++) {
+            tr.appendChild(document.createElement('td'));
+        }
+        for (let day = 1; day <= daysInMonth; day++) {
+            if (tr.children.length === 7) {
+                table.appendChild(tr);
+                tr = document.createElement('tr');
+            }
+            const td = document.createElement('td');
+            td.textContent = day;
+            td.tabIndex = 0;
+
+            if (
+                day === today.getDate() &&
+                month === today.getMonth() &&
+                year === today.getFullYear()
+            ) {
+                td.style.border = '2px solid #F2CDAC';
+            }
+
+            td.onclick = () => {
+                if (selectedCell) selectedCell.classList.remove('simple-calendar-selected');
+                td.classList.add('simple-calendar-selected');
+                selectedCell = td;
+                const selDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                showTasksForDate(selDate);
+            };
+            tr.appendChild(td);
+        }
+        while (tr.children.length < 7) {
+            tr.appendChild(document.createElement('td'));
+        }
+        table.appendChild(tr);
+        calendarContainer.appendChild(table);
+    }
+
+    // Отобразить задачи выбранной даты
+    function showTasksForDate(selectedDate) {
+        calendarTasksBlock.innerHTML = '';
+
+        const taskBlocks = ['future-tasks', 'today-tasks', 'overdue-tasks', 'complete-tasks'];
+        let found = false;
+
+        taskBlocks.forEach(blockId => {
+            const block = document.getElementById(blockId);
+            if (!block) return;
+            const tasks = block.querySelectorAll('.task-class');
+
+            tasks.forEach(task => {
+                const dateElem = task.querySelector('.task-date');
+                if (!dateElem) return;
+                const taskDate = dateElem.textContent.trim().slice(0, 10);
+
+                if (taskDate === selectedDate) {
+                    found = true;
+
+                    const clonedTask = task.cloneNode(true);
+
+                    clonedTask.style.cursor = 'pointer';
+
+                    clonedTask.addEventListener('click', () => {
+                        calendarModalTitle.textContent = clonedTask.querySelector('.task-title').textContent;
+                        calendarModalDate.textContent = taskDate;
+                        calendarModalDescription.textContent = clonedTask.dataset.description || '';
+                        calendarModal.style.display = 'flex';
+                        document.body.classList.add('close-overflow');
+                    });
+
+                    calendarTasksBlock.appendChild(clonedTask);
+                }
+            });
+        });
+
+        if (!found) {
+            calendarTasksBlock.innerHTML = '<div style="color:white;">Задачи на эту дату отсутствуют.</div>';
+        }
+    }
+
+    calendarBtnClose.addEventListener('click', () => {
+        calendarModal.style.display = 'none';
+        document.body.classList.remove('close-overflow');
+    });
+
+    renderCalendar(currentMonth, currentYear);
+});
+
+
+

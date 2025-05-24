@@ -263,6 +263,63 @@
     align-items: center;
 }
 
+#simple-calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+    color: white;
+}
+
+.simple-calendar-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.simple-calendar-table td,
+.simple-calendar-table th {
+    border: 1px solid #fff;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    background: #0897B4;
+    transition: background 0.2s;
+}
+
+.simple-calendar-table td:hover {
+    background: #1B7F7A;
+}
+
+.simple-calendar-selected {
+    background: #F2CDAC !important;
+    color: #4C4A59 !important;
+}
+
+.simple-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 260px;
+    margin-bottom: 8px;
+}
+
+.simple-calendar-header button {
+    background: #4C4A59;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.simple-calendar-header span {
+    font-size: 20px;
+    font-weight: bold;
+}
 
 
 

@@ -64,17 +64,18 @@
         </div>
     </section>
 
-    <!--Блок "Календарь"-->
+    <!-- Блок "Календарь" -->
     <section id="Calendar-Block">
         <h1 class="headerBlock">Календарь</h1>
         <div class="mainCalendarBlock">
-            <div class="calendarBlock">
-                <div class="calendar" id="calendar-here">
+            <div class="calendarBlock" style="max-width: 320px; margin: 0 auto;">
+                <div id="simple-calendar" style="width: 100%;"></div>
+                <h3 style="color:white; margin-top:10px; margin-left:25px;">Задачи на выбранную дату:</h3>
+                <div id="calendar-tasks-block"
+                    style="min-height:80px; background:#0b5c6b; padding:10px; border-radius:8px; border: 1px solid #0897B4;">
                 </div>
-                <div class="calendarBlock-Tasks" id="calendar-tasks-block"></div>
             </div>
         </div>
-
     </section>
 
     <!--Блок "Заметки"-->
@@ -87,6 +88,18 @@
             <div class="btn-Add-Note" id="btn-add-note">Добавить заметку</div>
         </div>
     </section>
+
+    <!-- Модальное окно для просмотра задач из календаря -->
+    <div id="calendar-task-modal" class="modal-window"
+        style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1050;">
+        <div style="background:#333; padding:20px; border-radius:8px; width:320px; color:white;">
+            <h3 id="calendar-modal-title"></h3>
+            <p><strong>Дата:</strong> <span id="calendar-modal-date"></span></p>
+            <p><strong>Описание:</strong> <span id="calendar-modal-description"></span></p>
+            <button id="calendar-btn-modal-close"
+                style="margin-top:15px; padding:8px 12px; border:none; border-radius:6px; background:#0897B4; color:white; cursor:pointer;">Назад</button>
+        </div>
+    </div>
 
     <!--Окно добавления новой задачи-->
     <div id="add-task-window" class="modal-window">
