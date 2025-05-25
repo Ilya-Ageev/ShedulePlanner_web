@@ -74,7 +74,7 @@
 }
 
 .headerBlock {
-    margin: 76px auto 0 auto;
+    margin: 70px auto 0 auto;
     text-align: center;
     font-family: Jost;
     font-size: 60px;
@@ -336,6 +336,10 @@
 
 /* ====== Адаптивность для больших экранов ====== */
 @media (max-width: 1600px) {
+    .headerBlock {
+        margin-top: 60px;
+    }
+
     .modal-authorization-and-registration {
         width: 80%;
     }
@@ -369,7 +373,7 @@
     }
 
     .headerBlock {
-        margin: 58px auto 0 auto;
+        margin: 52px auto 0 auto;
         font-size: 50px;
     }
 
