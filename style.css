@@ -155,10 +155,16 @@
     border-radius: 10px;
     padding: 10px;
     border: 1px solid #4C4A59;
-    width: 40%;
+    width: 50%;
     max-width: 700px;
-    height: 20%;
+    height: auto;
     max-height: 350px;
+}
+
+.name-user {
+    font-family: Jost;
+    font-size: 30px;
+    color: black;
 }
 
 .modal-authorization-and-registration {
@@ -358,6 +364,10 @@
 
 /* ====== Адаптивность для средних экранов ====== */
 @media (max-width: 1000px) {
+    .name-user {
+        font-size: 25px;
+    }
+
     .headerBlock {
         margin: 58px auto 0 auto;
         font-size: 50px;
@@ -418,6 +428,10 @@
 
 /* ====== Адаптивность для мобильных устройств ====== */
 @media (max-width: 600px) {
+    .name-user {
+        font-size: 20px;
+    }
+
     .btn-register {
         font-size: 14px;
         padding: 5px;

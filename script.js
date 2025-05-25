@@ -1,5 +1,3 @@
-const API_BASE_URL = 'http://localhost:3000';
-
 const profileModal = document.getElementById('profile');
 const authorizationModal = document.getElementById('modal');
 const registrationModal = document.getElementById('registration');
@@ -11,14 +9,23 @@ function isAuthenticated() {
 
 //Проверка авторизации при нажатии кнопки "Профиль"
 btn.onclick = () => {
-    document.body.classList.add('close-overflow');
-
     if (isAuthenticated()) {
         profileModal.style.display = 'flex';
+        document.body.classList.add('close-overflow');
+        const currentUser = getCurrentUser();
+        const name_user = document.getElementById('name-user');
+        name_user.textContent = currentUser.name;
     } else {
         authorizationModal.style.display = 'flex';
+        document.body.classList.add('close-overflow');
     }
 };
+//Кнопка "Назад" в профиле
+const btn_profile_back = document.getElementById('btn-profile-back');
+btn_profile_back.onclick = () => {
+    document.getElementById('profile').style.display = 'none';
+    document.body.classList.remove('close-overflow');
+}
 
 //Кнопка "Назад" в форме входа
 const btn_login_back = document.getElementById('btn-login-back');
@@ -30,8 +37,8 @@ btn_login_back.onclick = () => {
 };
 
 //Кнопка для перехода к форме регистрации
-const btn_registration = document.getElementById('btn-registration');
-btn_registration.onclick = () => {
+const btn_registration_modal = document.getElementById('btn-registration-modal');
+btn_registration_modal.onclick = () => {
     authorizationModal.style.display = 'none';
     registrationModal.style.display = 'flex';
 };
@@ -75,6 +82,41 @@ const btn_note_add_back = document.getElementById('btn-note-add-back');
 btn_note_add_back.onclick = () => {
     document.body.classList.remove('close-overflow');
     add_note_window.style.display = 'none';
+};
+
+//Регистрация========================
+const btn_registration = document.getElementById('btn-registration');
+btn_registration.onclick = () => {
+    const registration = document.getElementById('registration');
+    const registration_name = document.getElementById('registration-name').value;
+    const registration_login = document.getElementById('registration-login').value;
+    const registration_password = document.getElementById('registration-password').value;
+    if (storage.registerUser(registration_name, registration_login, registration_password)) {
+        registration.style.display = 'none';
+        document.body.classList.remove('close-overflow');
+    }
+}
+
+//Вход =====================================
+const btn_log_in = document.getElementById('btn-log-in');
+btn_log_in.onclick = () => {
+    const login_login = document.getElementById('login-login').value;
+    const login_password = document.getElementById('login-password').value;
+    if (storage.loginUser(login_login, login_password)) {
+
+
+        document.body.classList.remove('close-overflow');
+        authorizationModal.style.display = 'none';
+        const inputs = authorizationModal.querySelectorAll('input');
+        inputs.forEach(input => input.value = '');
+    }
+};
+
+//Выход из аккаунта================
+document.getElementById('btn-log-out').onclick = () => {
+    storage.logoutUser();
+    document.getElementById('profile').style.display = 'none';
+    document.body.classList.remove('close-overflow');
 };
 
 //===========  Добавление новой задачи   =======================================================================
@@ -156,6 +198,7 @@ add_new_task.onclick = (event) => {
         const completedCheckbox = document.getElementById('task-completed-checkbox');
         completedCheckbox.checked = new_task.dataset.completed === 'true';
     });
+
 
     // Очищаем поля формы
     const inputs = add_task_window.querySelectorAll('input');
@@ -515,5 +558,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //============== Работа с Backend ==========================
-
-// Функция регистрации
