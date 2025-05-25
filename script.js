@@ -1,3 +1,5 @@
+const API_BASE_URL = 'http://localhost:3000';
+
 const profileModal = document.getElementById('profile');
 const authorizationModal = document.getElementById('modal');
 const registrationModal = document.getElementById('registration');
@@ -512,5 +514,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCalendar(currentMonth, currentYear);
 });
 
+//============== Работа с Backend ==========================
 
-
+// Функция регистрации
